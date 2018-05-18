@@ -1,5 +1,4 @@
-from dgageot/helloworld
+FROM nginx
 
-# Expose the http port
-RUN touch /tmp/vaibhav
+COPY app/index.html /usr/share/nginx/html/index.html
 
