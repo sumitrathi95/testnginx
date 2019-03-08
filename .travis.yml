@@ -27,3 +27,10 @@ jobs:
         - TAG=`grep SNAPSHOT pom.xml | sed 's|[<,>,/,version ]||g'`
         - echo TAG=${TAG} > trigger.properties
         - echo ACTION=DEPLOY >> trigger.properties
+        
+addons:
+  artifacts: true
+  paths:
+    - ./trigger.properties
+  debug: true
+    
