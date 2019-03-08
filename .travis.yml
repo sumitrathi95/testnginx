@@ -18,6 +18,7 @@ jobs:
         - echo $TAG
         - sed -i -- "s/VER/${TAG}/g" app/index.html
         - docker build -t vaibhavthakur/nginx-demo:$TAG .
+        - docker login --username=vaibhavthakur --password=$DOCKERPASS
         - docker push vaibhavthakur/nginx-demo:$TAG
         
     - stage: artifact
