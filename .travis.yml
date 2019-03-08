@@ -21,12 +21,9 @@ jobs:
         - echo "$DOCKERPASS" | docker login -u vaibhavthakur --password-stdin
         - docker push vaibhavthakur/nginx-demo:$TAG
         - sed -i -- "s/TAG/${TAG}/g" demo-nginx.yaml
-        - cat demo-nginx.yaml
         
         
 addons:
   artifacts: true
-  paths:
-    - ./demo-nginx.yaml
   debug: true
     
