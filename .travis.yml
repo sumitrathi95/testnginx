@@ -18,15 +18,10 @@ jobs:
         - echo $TAG
         - sed -i -- "s/VER/${TAG}/g" app/index.html
         - docker build -t vaibhavthakur/nginx-demo:$TAG .
-
-
-    - stage: publish
-      name: "Push Docker images to registry"
-      if: branch = master
-      script:
         - docker push vaibhavthakur/nginx-demo:$TAG
-
+        
     - stage: artifact
       name: build artifact file
       script:
+        - TAG=`grep SNAPSHOT pom.xml | sed 's|[<,>,/,version ]||g'`
         - echo TAG=${TAG} > trigger.properties
