@@ -20,17 +20,13 @@ jobs:
         - docker build -t vaibhavthakur/nginx-demo:$TAG .
         - echo "$DOCKERPASS" | docker login -u vaibhavthakur --password-stdin
         - docker push vaibhavthakur/nginx-demo:$TAG
+        - sed -i -- "s/TAG/${TAG}/g" demo-nginx.yaml
+        - cat demo-nginx.yaml
         
-    - stage: artifact
-      name: build artifact file
-      script:
-        - TAG=`grep SNAPSHOT pom.xml | sed 's|[<,>,/,version ]||g'`
-        - echo TAG=${TAG} > trigger.properties
-        - echo ACTION=DEPLOY >> trigger.properties
         
 addons:
   artifacts: true
   paths:
-    - ./trigger.properties
+    - ./demo-nginx.yaml
   debug: true
     
