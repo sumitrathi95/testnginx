@@ -26,3 +26,4 @@ jobs:
       script:
         - TAG=`grep SNAPSHOT pom.xml | sed 's|[<,>,/,version ]||g'`
         - echo TAG=${TAG} > trigger.properties
+        - echo ACTION=DEPLOY >> trigger.properties
