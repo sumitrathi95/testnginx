@@ -26,5 +26,6 @@ jobs:
 addons:
   artifacts: true
   debug: true
-  target_paths: /
+  target_paths:
+  - /
     
