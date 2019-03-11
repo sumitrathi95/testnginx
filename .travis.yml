@@ -9,31 +9,27 @@ branches:
   exclude:
     - /^ADR-.*$/ 
 
-before_install:
-  # set up awscli packages
-  - pip install --user awscli
-
 jobs:
   include:
     - stage: build
       name: "Build Docker Image"
       script:
         - TAG=`grep SNAPSHOT pom.xml | sed 's|[<,>,/,version ]||g'`
-        - echo $TAG
         - sed -i -- "s/VER/${TAG}/g" app/index.html
         - docker build -t vaibhavthakur/nginx-demo:$TAG .
         - echo "$DOCKERPASS" | docker login -u vaibhavthakur --password-stdin
         - docker push vaibhavthakur/nginx-demo:$TAG
-        - sed -i -- "s/TAG/${TAG}/g" demo-nginx.yaml
-        - aws s3 cp demo-nginx.yaml s3://app-kubernetes-manifests/demo-app/
-        - echo ACTION=DEPLOY > trigger.properties
+        - sed -i -- "s/TAG/${TAG}/g" demo-nginx.yaml 
 
 addons: 
   artifacts: 
     paths:
-      - ./trigger.properties
-      - ./app/index.html
+      - ./demo-nginx.yaml
     target_paths: 
       - /demo-app
     debug: true
+
+
+
+
 
