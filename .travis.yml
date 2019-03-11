@@ -36,3 +36,4 @@ addons:
     target_paths: 
       - /demo-app
     debug: true
+
