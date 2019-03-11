@@ -26,3 +26,14 @@ jobs:
         - docker push vaibhavthakur/nginx-demo:$TAG
         - sed -i -- "s/TAG/${TAG}/g" demo-nginx.yaml
         - aws s3 cp demo-nginx.yaml s3://app-kubernetes-manifests/demo-app/
+        - echo ACTION=DEPLOY > trigger.properties
+
+addons: 
+  artifacts: 
+    s3_region: us-east-2
+    paths:
+      - ./trigger.properties
+      - ./app/index.html
+    target_paths: 
+      - /demo-app
+    debug: true
