@@ -26,7 +26,7 @@ addons:
     paths:
       - ./demo-nginx.yaml
     target_paths: 
-      - /demo-app
+      - /demo-app/${TRAVIS_REPO_SLUG}/${TRAVIS_BUILD_NUMBER}/
     debug: true
 
 
