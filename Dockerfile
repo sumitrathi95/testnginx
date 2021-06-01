@@ -1,4 +1,4 @@
-FROM vtkub/nginx-vts:1.0
+FROM nginx
 
 COPY app/index.html /usr/share/nginx/html/index.html
 
